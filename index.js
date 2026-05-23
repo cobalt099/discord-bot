@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const path = require("node:path");
+const { DefaultWebSocketManagerOptions } = require("@discordjs/ws");
 const {
   Client,
   Collection,
@@ -10,6 +11,10 @@ const {
   Routes,
 } = require("discord.js");
 const { walkCommandFiles } = require("./utils/loadCommands");
+
+// Mobile phone icon next to bot name (Discord Android/iOS client)
+DefaultWebSocketManagerOptions.identifyProperties.browser =
+  process.env.PRESENCE_DEVICE === "ios" ? "Discord iOS" : "Discord Android";
 
 const token = process.env.BOT_TOKEN;
 const clientId = process.env.CLIENT_ID;
